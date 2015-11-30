@@ -1,0 +1,4 @@
+---
+backup:
+  root_path: '~/Backup'
+  user: root

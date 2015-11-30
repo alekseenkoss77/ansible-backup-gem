@@ -1,0 +1,29 @@
+---
+- name: Backup gem | install
+  gem: name=backup state=present
+
+- name: Backup gem | install Whenever
+  gem: name=whenever state=present
+
+- name: Backup gem | create backup folder
+  file: path={{ backup.root_path }} state=directory owner={{ backup.user }}
+  register: folder
+
+- name: Backup gem | create config folder
+  file: path={{ backup.root_path }}/config state=directory owner={{ backup.user }}
+
+- name: Backup gem | create models folder
+  file: path={{ backup.root_path }}/models state=directory owner={{ backup.user }}
+
+- name: Backup gem | copy scheduler
+  template: src='schedule.rb.j2' dest={{ backup.root_path }}/config/schedule.rb owner={{ backup.user }}
+
+- name: Backup gem | copy config
+  template: src={{ item.config }} dest={{ backup.root_path }}/config.rb owner={{ backup.user }}
+
+- name: Backup gem | copy models
+  template: src={{ item.model_path }} dest={{ backup.root_path }}/models/{{ item.name }} owner={{ backup.user }}
+  with_items: "{{ backup.models }}"
+
+- name: Backup gem | update crontab
+  shell: /usr/local/bin/whenever --update-crontab chdir={{ backup.root_path }}
