@@ -1,9 +1,11 @@
 ---
 - name: Backup gem | install
   gem: name=backup state=present
+  sudo: yes
 
 - name: Backup gem | install Whenever
   gem: name=whenever state=present
+  sudo: yes
 
 - name: Backup gem | create backup folder
   file: path={{ backup.root_path }} state=directory owner={{ backup.user }}
