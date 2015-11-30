@@ -1,10 +1,10 @@
 ---
 - name: Backup gem | install
-  gem: name=backup state=present
+  gem: name=backup state=latest user_install=no
   sudo: yes
 
 - name: Backup gem | install Whenever
-  gem: name=whenever state=present
+  gem: name=whenever state=latest user_install=no
   sudo: yes
 
 - name: Backup gem | create backup folder
