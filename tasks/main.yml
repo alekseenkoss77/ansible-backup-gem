@@ -19,7 +19,7 @@
   template: src='schedule.rb.j2' dest={{ backup.root_path }}/config/schedule.rb owner={{ backup.user }}
 
 - name: Backup gem | copy config
-  template: src={{ item.config }} dest={{ backup.root_path }}/config.rb owner={{ backup.user }}
+  template: src={{ backup.config }} dest={{ backup.root_path }}/config.rb owner={{ backup.user }}
 
 - name: Backup gem | copy models
   template: src={{ item.model_path }} dest={{ backup.root_path }}/models/{{ item.name }} owner={{ backup.user }}
