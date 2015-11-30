@@ -1,5 +1,5 @@
 {% for item in backup.cron %}
 every {{ item.day }}, :at => '{{ item.time }}' do
-  command "backup perform -t {{ item.model }}"
+  command "backup perform -t {{ item.model }} --config-file='{{ backup.root_path }}/config.rb'"
 end
 {% endfor %}
