@@ -26,4 +26,4 @@
   with_items: "{{ backup.models }}"
 
 - name: Backup gem | update crontab
-  shell: /usr/local/bin/whenever --update-crontab chdir={{ backup.root_path }}
+  command: whenever --update-crontab chdir={{ backup.root_path }}
